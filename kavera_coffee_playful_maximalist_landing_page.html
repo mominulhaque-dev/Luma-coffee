@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kavera Coffee — Good Coffee, Better Mood (Since 2026)</title>
+
+  <!-- Google Fonts: Three-Role Typography Pairing -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=Permanent+Marker&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN for responsive grid & layout utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS — PLAYFUL MAXIMALIST COLOR-BLOCK POP
+       Strict hard-edged bands, zero gradients between brand colors, zero shadows
+       ========================================================================== */
+    :root {
+      --rose: #e4a1ae;
+      --offwhite: #fdfdfd;
+      --sky: #cbecf6;
+      --teal: #53b7b9;
+      --cocoa: #463429;
+      --cocoa-90: rgba(70, 52, 41, 0.9);
+      --cocoa-80: rgba(70, 52, 41, 0.8);
+      --cocoa-50: rgba(70, 52, 41, 0.5);
+      --cocoa-25: rgba(70, 52, 41, 0.25);
+      --cocoa-15: rgba(70, 52, 41, 0.15);
+      --orange: #ff4500;
+      --orange-hover: #e03d00;
+
+      /* Three-Role Typography */
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-marker: 'Permanent Marker', cursive;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Playful Motion Personality */
+      --ease-playful: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Typography Utility Roles */
+    .font-serif-italic {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+    }
+
+    .font-marker {
+      font-family: var(--font-marker);
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .font-sans-body {
+      font-family: var(--font-sans);
+    }
+
+    /* Container: 1200px max-width, 16px mobile margin, 24px desktop gutter */
+    .band-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .band-inner {
+        padding-inline: 24px;
+      }
+    }
+
+    /* Full-Bleed Stacked Color Bands (Zero Vertical Gap) */
+    .color-band {
+      position: relative;
+      width: 100%;
+      overflow-x: clip;
+    }
+
+    .band-pad {
+      padding-block: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .band-pad {
+        padding-block: 88px;
+      }
+    }
+
+    /* ==========================================================================
+       2. BUTTONS & MICRO-INTERACTIONS (Playful Anticipation + Spring Settle)
+       ========================================================================== */
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 12px 28px;
+      font-family: var(--font-marker);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: 2px solid transparent;
+      user-select: none;
+      transition:
+        transform 180ms var(--ease-playful),
+        background-color 150ms var(--ease-out),
+        color 150ms var(--ease-out),
+        border-color 150ms var(--ease-out);
+      will-change: transform;
+    }
+
+    .btn-pill:focus-visible,
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--cocoa);
+      outline-offset: 3px;
+    }
+
+    /* Primary Signal Orange */
+    .btn-primary {
+      background-color: var(--orange);
+      color: var(--offwhite);
+      border-color: var(--orange);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--orange-hover);
+      border-color: var(--orange-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.97) translateY(0);
+      transition-duration: 60ms;
+    }
+
+    /* Secondary Off-White with Cocoa Border */
+    .btn-secondary {
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      border-color: var(--cocoa);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--cocoa);
+      color: var(--offwhite);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary:active {
+      transform: scale(0.97);
+      transition-duration: 60ms;
+    }
+
+    /* Hero Off-White Pill (No Border) */
+    .btn-hero {
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      border-color: var(--offwhite);
+      padding: 14px 32px;
+      font-size: 13px;
+    }
+
+    .btn-hero:hover {
+      background-color: var(--orange);
+      border-color: var(--orange);
+      color: var(--offwhite);
+      transform: translateY(-2px);
+    }
+
+    .btn-hero:active {
+      transform: scale(0.97);
+      transition-duration: 60ms;
+    }
+
+    /* Dark Cocoa Pill (on Orange Band) */
+    .btn-cocoa {
+      background-color: var(--cocoa);
+      color: var(--offwhite);
+      border-color: var(--cocoa);
+    }
+
+    .btn-cocoa:hover {
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      transform: translateY(-2px);
+    }
+
+    .btn-cocoa:active {
+      transform: scale(0.97);
+      transition-duration: 60ms;
+    }
+
+    /* Button Squash-and-Stretch Pop Class triggered via JS on click */
+    @keyframes btnSquashPop {
+      0%   { transform: scale(0.97); }
+      40%  { transform: scale(1.04, 0.96); }
+      75%  { transform: scale(1.02, 1.01); }
+      100% { transform: scale(1); }
+    }
+
+    .is-popping {
+      animation: btnSquashPop 260ms var(--ease-playful);
+    }
+
+    /* ==========================================================================
+       3. TICKER BAR (#ff4500, linear continuous loop, pauses on hover)
+       ========================================================================== */
+    .ticker-band {
+      background-color: var(--orange);
+      color: var(--cocoa);
+      height: 30px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--cocoa-25);
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerLoop 28s linear infinite;
+      will-change: transform;
+    }
+
+    .ticker-band:hover .ticker-track {
+      animation-play-state: paused;
+    }
+
+    .ticker-group {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding-right: 28px;
+      white-space: nowrap;
+      font-family: var(--font-marker);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--cocoa);
+    }
+
+    @keyframes tickerLoop {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* ==========================================================================
+       4. NAVIGATION (#cbecf6, 68px tall, directional hand-drawn underline)
+       ========================================================================== */
+    .nav-band {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background-color: var(--sky);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--cocoa-25);
+    }
+
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 34px;
+      border-radius: 8px;
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      font-family: var(--font-marker);
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border: 1.5px solid var(--cocoa);
+      transition: transform 180ms var(--ease-playful);
+    }
+
+    .logo-badge:hover {
+      transform: rotate(-1.5deg) scale(1.03);
+    }
+
+    .nav-link {
+      position: relative;
+      font-family: var(--font-marker);
+      font-size: 12.5px;
+      letter-spacing: 0.05em;
+      color: var(--cocoa);
+      text-decoration: none;
+      padding-block: 6px;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2.5px;
+      background-color: var(--orange);
+      border-radius: 99px;
+      transform: scaleX(0) rotate(-1deg);
+      transform-origin: left;
+      transition: transform 200ms var(--ease-playful);
+    }
+
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after {
+      transform: scaleX(1) rotate(-1deg);
+    }
+
+    .icon-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: transparent;
+      border: 0;
+      color: var(--cocoa);
+      cursor: pointer;
+      transition: transform 160ms var(--ease-playful), background-color 150ms ease;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--offwhite);
+      transform: translateY(-1px);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.94);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: 3px;
+      right: 2px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      border-radius: 999px;
+      background-color: var(--orange);
+      color: var(--offwhite);
+      font-family: var(--font-marker);
+      font-size: 10px;
+      line-height: 18px;
+      text-align: center;
+      transition: transform 220ms var(--ease-playful);
+    }
+
+    @keyframes badgePop {
+      0%   { transform: scale(1); }
+      45%  { transform: scale(1.42) rotate(-8deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    .cart-badge.pop {
+      animation: badgePop 300ms var(--ease-playful);
+    }
+
+    /* ==========================================================================
+       5. HERO & STICKERS (Primary + Secondary + Ambient Motion Layers)
+       ========================================================================== */
+    .hero-band {
+      position: relative;
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--cocoa);
+      overflow: hidden;
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      inset: -3%;
+      width: 106%;
+      height: 106%;
+      object-fit: cover;
+      object-position: center;
+      animation: heroAmbientDrift 16s var(--ease-in-out) infinite alternate;
+    }
+
+    /* Subtle bottom-up dark cocoa gradient (0% to 45% opacity) ONLY for photo legibility */
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(70, 52, 41, 0.56) 0%,
+        rgba(70, 52, 41, 0.28) 45%,
+        rgba(70, 52, 41, 0.14) 100%
+      );
+      pointer-events: none;
+    }
+
+    @keyframes heroAmbientDrift {
+      0%   { transform: scale(1.02) translate3d(0, 0, 0); }
+      100% { transform: scale(1.06) translate3d(-1.2%, -0.8%, 0); }
+    }
+
+    .hero-headline {
+      font-size: clamp(36px, 6.2vw, 72px);
+      line-height: 1.02;
+      color: var(--offwhite);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    @keyframes floatStickerA {
+      0%, 100% { transform: rotate(-6deg) translateY(0px); }
+      50%      { transform: rotate(-3deg) translateY(-8px); }
+    }
+
+    @keyframes floatStickerB {
+      0%, 100% { transform: rotate(5deg) translateY(0px); }
+      50%      { transform: rotate(8deg) translateY(-6px); }
+    }
+
+    .sticker-float-a {
+      animation: floatStickerA 5.5s var(--ease-in-out) infinite;
+    }
+
+    .sticker-float-b {
+      animation: floatStickerB 6.4s var(--ease-in-out) infinite;
+    }
+
+    /* ==========================================================================
+       6. SIGNATURE INTERACTIVE: MOOD & ROAST DIAL (#cbecf6)
+       ========================================================================== */
+    .mood-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 22px;
+      border-radius: 999px;
+      border: 2px solid var(--cocoa);
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      font-family: var(--font-marker);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition:
+        transform 200ms var(--ease-playful),
+        background-color 160ms ease,
+        color 160ms ease;
+    }
+
+    .mood-pill:hover {
+      background-color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .mood-pill:active {
+      transform: scale(0.96);
+    }
+
+    .mood-pill[aria-pressed="true"] {
+      background-color: var(--orange);
+      border-color: var(--orange);
+      color: var(--offwhite);
+      transform: translateY(-2px) rotate(-1.5deg);
+    }
+
+    @keyframes bagArcEnter {
+      0%   { opacity: 0; transform: translate3d(-14px, 18px, 0) rotate(-6deg) scale(0.92); }
+      55%  { opacity: 1; transform: translate3d(4px, -6px, 0) rotate(2deg) scale(1.03); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    }
+
+    .bag-stage-anim {
+      animation: bagArcEnter 320ms var(--ease-playful) both;
+    }
+
+    @keyframes textFollowThrough {
+      0%   { opacity: 0; transform: translate3d(0, 12px, 0); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+
+    .follow-through-anim {
+      animation: textFollowThrough 280ms var(--ease-out) 70ms both;
+    }
+
+    .meter-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background-color: var(--offwhite);
+      border: 1.5px solid var(--cocoa);
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      height: 100%;
+      border-radius: 999px;
+      background-color: var(--cocoa);
+      transform-origin: left;
+      transition: transform 340ms var(--ease-playful), background-color 220ms ease;
+    }
+
+    /* ==========================================================================
+       7. PRODUCT CARDS (Flat, NO shadow, NO hover animation per spec)
+       ========================================================================== */
+    .product-card {
+      background-color: var(--sky);
+      border: 1px solid var(--cocoa-15);
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .product-img-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: var(--offwhite);
+      margin-bottom: 14px;
+    }
+
+    .product-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-family: var(--font-marker);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      line-height: 1;
+    }
+
+    .tag-orange { background-color: var(--orange); color: var(--offwhite); }
+    .tag-teal   { background-color: var(--teal);   color: var(--cocoa); }
+    .tag-white  { background-color: var(--offwhite); color: var(--cocoa); border: 1.5px solid var(--cocoa); }
+
+    .filter-pill {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--cocoa);
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      font-family: var(--font-marker);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: transform 160ms var(--ease-playful), background-color 150ms ease, color 150ms ease;
+    }
+
+    .filter-pill:hover {
+      background-color: var(--sky);
+      transform: translateY(-1px);
+    }
+
+    .filter-pill[aria-pressed="true"] {
+      background-color: var(--orange);
+      border-color: var(--orange);
+      color: var(--offwhite);
+    }
+
+    .grind-chip {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1.5px solid var(--cocoa-25);
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+    }
+
+    .grind-chip[aria-pressed="true"] {
+      background-color: var(--cocoa);
+      border-color: var(--cocoa);
+      color: var(--offwhite);
+    }
+
+    /* ==========================================================================
+       8. SCROLL REVEAL (Arc entrance from 20px below, stagger < 500ms)
+       ========================================================================== */
+    .reveal-el {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+      transition:
+        opacity 280ms var(--ease-out) var(--stagger, 0ms),
+        transform 320ms var(--ease-playful) var(--stagger, 0ms);
+      will-change: transform, opacity;
+    }
+
+    .reveal-el.is-in {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* ==========================================================================
+       9. NEWSLETTER ERROR SHAKE & SUCCESS POP
+       ========================================================================== */
+    @keyframes errorShake {
+      0%, 100% { transform: translateX(0); }
+      20%      { transform: translateX(-12px); }
+      45%      { transform: translateX(12px); }
+      70%      { transform: translateX(-8px); }
+      88%      { transform: translateX(6px); }
+    }
+
+    .is-shaking {
+      animation: errorShake 350ms var(--ease-out) forwards;
+    }
+
+    @keyframes checkPop {
+      0%   { opacity: 0; transform: scale(0.5) rotate(-12deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    .check-pop {
+      animation: checkPop 300ms var(--ease-playful) both;
+    }
+
+    /* ==========================================================================
+       10. SLIDE-OVER CART DRAWER & MOBILE MENU
+       ========================================================================== */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background-color: rgba(70, 52, 41, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 240ms var(--ease-out);
+    }
+
+    .drawer-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 70;
+      width: min(420px, 100vw);
+      background-color: var(--offwhite);
+      color: var(--cocoa);
+      border-left: 2px solid var(--cocoa);
+      display: flex;
+      flex-direction: column;
+      transform: translate3d(100%, 0, 0);
+      transition: transform 320ms var(--ease-playful);
+    }
+
+    .cart-drawer.is-open {
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* Horizontal Proof Strip Scrollbar Hide */
+    .no-scrollbar {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Mobile Footer Accordion */
+    .footer-acc-trigger svg {
+      transition: transform 200ms var(--ease-playful);
+    }
+    .footer-acc-trigger[aria-expanded="true"] svg {
+      transform: rotate(45deg);
+    }
+
+    /* ==========================================================================
+       11. ACCESSIBILITY — REDUCED MOTION
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .ticker-track,
+      .hero-bg-img,
+      .sticker-float-a,
+      .sticker-float-b {
+        animation: none !important;
+      }
+      .reveal-el {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: opacity 150ms ease !important;
+      }
+      .btn-pill,
+      .mood-pill,
+      .cart-drawer,
+      .meter-fill {
+        transition-duration: 100ms !important;
+        transition-timing-function: ease !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       BAND 1: TICKER BAR (#ff4500, continuous loop, pauses on hover)
+       ======================================================================== -->
+  <div class="ticker-band" role="region" aria-label="Store announcements">
+    <div class="ticker-track">
+      <div class="ticker-group">
+        <span>ROASTED TO ORDER IN SMALL BATCHES</span><span>✦</span>
+        <span>FREE US SHIPPING $45+</span><span>✦</span>
+        <span>98.4% ZERO-BITTERNESS RATING</span><span>✦</span>
+        <span>ROAST DATE ON EVERY BAG</span><span>✦</span>
+        <span>GOOD COFFEE, BETTER MOOD</span><span>✦</span>
+      </div>
+      <div class="ticker-group" aria-hidden="true">
+        <span>ROASTED TO ORDER IN SMALL BATCHES</span><span>✦</span>
+        <span>FREE US SHIPPING $45+</span><span>✦</span>
+        <span>98.4% ZERO-BITTERNESS RATING</span><span>✦</span>
+        <span>ROAST DATE ON EVERY BAG</span><span>✦</span>
+        <span>GOOD COFFEE, BETTER MOOD</span><span>✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       BAND 2: STICKY NAVIGATION (#cbecf6, 68px tall)
+       ======================================================================== -->
+  <header class="nav-band">
+    <div class="band-inner flex items-center justify-between gap-4">
+      <!-- Left: Wordmark Badge + Desktop Links -->
+      <div class="flex items-center gap-6 lg:gap-8">
+        <a href="#top" class="logo-badge" aria-label="Kavera Coffee Home">
+          KAVERA COFFEE
+        </a>
+
+        <nav class="hidden md:flex items-center gap-5 lg:gap-7" aria-label="Primary Navigation">
+          <a href="#shop" class="nav-link">SHOP</a>
+          <a href="#mood-blender" class="nav-link">MOOD BLENDER</a>
+          <a href="#roasts" class="nav-link">ROASTS</a>
+          <a href="#our-story" class="nav-link">OUR STORY</a>
+          <a href="#reviews" class="nav-link">REVIEWS</a>
+        </nav>
+      </div>
+
+      <!-- Right: 3 Hand-Drawn Line Icons (20px) + Mobile Menu Toggle -->
+      <div class="flex items-center gap-1 sm:gap-2">
+        <button type="button" id="searchToggleBtn" class="icon-btn" aria-label="Search roasts">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="10.8" cy="10.8" r="7.2" />
+            <path d="M16.2 16.4l4.8 4.6" />
+          </svg>
+        </button>
+
+        <button type="button" id="accountBtn" class="icon-btn" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="8.2" r="4.1" />
+            <path d="M4.2 20.5c1.2-3.9 4.3-5.8 7.8-5.8s6.6 1.9 7.8 5.8" />
+          </svg>
+        </button>
+
+        <button type="button" id="cartOpenBtn" class="icon-btn" aria-label="Open shopping bag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5.5 8.5h13l-1.1 11.8a1.5 1.5 0 0 1-1.5 1.2H8.1a1.5 1.5 0 0 1-1.5-1.2L5.5 8.5z" />
+            <path d="M8.8 8.5V6.6a3.2 3.2 0 0 1 6.4 0v1.9" />
+          </svg>
+          <span id="cartCountBadge" class="cart-badge" aria-live="polite">0</span>
+        </button>
+
+        <button type="button" id="mobileNavBtn" class="icon-btn md:hidden" aria-label="Open menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h14M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Inline Search Bar Dropdown (Toggled by Search Icon) -->
+  <div id="searchBar" class="hidden color-band" style="background-color: var(--offwhite); border-bottom: 1.5px solid var(--cocoa);">
+    <div class="band-inner py-3 flex items-center gap-3">
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Search by roast, tasting note, or mood (e.g., espresso, hazelnut, decaf)..."
+        class="w-full rounded-full px-5 py-2.5 text-[15px]"
+        style="background-color: var(--sky); border: 1.5px solid var(--cocoa); color: var(--cocoa);"
+      />
+      <button type="button" id="searchCloseBtn" class="btn-pill btn-secondary !py-2 !px-4">CLOSE</button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobileNavPanel" class="hidden md:hidden color-band" style="background-color: var(--sky); border-bottom: 2px solid var(--cocoa);">
+    <nav class="band-inner py-5 flex flex-col gap-3" aria-label="Mobile Navigation">
+      <a href="#shop" class="nav-link text-base mobile-nav-link">SHOP</a>
+      <a href="#mood-blender" class="nav-link text-base mobile-nav-link">MOOD BLENDER</a>
+      <a href="#roasts" class="nav-link text-base mobile-nav-link">ROASTS</a>
+      <a href="#our-story" class="nav-link text-base mobile-nav-link">OUR STORY</a>
+      <a href="#reviews" class="nav-link text-base mobile-nav-link">REVIEWS</a>
+    </nav>
+  </div>
+
+  <main id="top">
+
+    <!-- ======================================================================
+         BAND 3: FULL-BLEED HERO (82vh, Saturated Coffee Visual + Sticker Bursts)
+         ====================================================================== -->
+    <section class="hero-band">
+      <img
+        src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2000&q=85"
+        onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/463429/fdfdfd?text=Kavera+Coffee';"
+        alt="Warm sunlit table with freshly poured specialty coffee and ceramic mugs"
+        class="hero-bg-img"
+      />
+      <div class="hero-scrim"></div>
+
+      <!-- Ambient Sticker Burst Top-Left -->
+      <div class="sticker-float-a hidden sm:block absolute top-10 left-8 lg:left-16 z-10 pointer-events-none" aria-hidden="true">
+        <svg width="116" height="116" viewBox="0 0 120 120">
+          <polygon points="60,4 70,18 87,11 89,28 107,29 101,45 116,55 104,67 112,83 95,88 94,105 77,102 68,116 55,105 39,113 33,96 16,96 19,79 4,70 14,56 6,40 23,35 23,18 40,21 49,6" fill="#ff4500" stroke="#463429" stroke-width="2" />
+          <text x="60" y="54" text-anchor="middle" fill="#fdfdfd" font-family="Permanent Marker, cursive" font-size="11.5">FRESHLY</text>
+          <text x="60" y="68" text-anchor="middle" fill="#fdfdfd" font-family="Permanent Marker, cursive" font-size="11.5">ROASTED</text>
+          <text x="60" y="82" text-anchor="middle" fill="#cbecf6" font-family="Permanent Marker, cursive" font-size="10">SINCE 2026</text>
+        </svg>
+      </div>
+
+      <!-- Ambient Sticker Burst Bottom-Right -->
+      <div class="sticker-float-b hidden md:block absolute bottom-10 right-10 lg:right-20 z-10 pointer-events-none" aria-hidden="true">
+        <div class="px-4 py-2 rounded-full border-2" style="background-color: var(--teal); border-color: var(--cocoa); color: var(--cocoa);">
+          <span class="font-marker text-[11px] tracking-wider">GOOD COFFEE, BETTER MOOD ✦</span>
+        </div>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="band-inner relative z-10 text-center py-16">
+        <p class="font-marker text-[11px] tracking-[0.12em] mb-4 reveal-el" style="color: var(--sky); --stagger: 0ms;">
+          SMALL-BATCH ROASTERY · EST. 2026
+        </p>
+        <h1 class="font-serif-italic hero-headline reveal-el" style="--stagger: 80ms;">
+          Wake up to coffee that actually fixes your morning.
+        </h1>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4 reveal-el" style="--stagger: 160ms;">
+          <a href="#shop" class="btn-pill btn-hero">SHOP THE ROASTS</a>
+          <a href="#mood-blender" class="btn-pill" style="background-color: transparent; color: var(--offwhite); border-color: var(--offwhite);">MATCH YOUR MOOD</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 4: TAGLINE BAND (#e4a1ae, 80px tall)
+         ====================================================================== -->
+    <section class="color-band" style="background-color: var(--rose); border-top: 1px solid var(--cocoa-25); border-bottom: 1px solid var(--cocoa-25);">
+      <div class="band-inner py-5 md:py-6 flex items-center justify-center gap-3 text-center">
+        <p class="font-serif-italic text-[26px] md:text-[32px] m-0" style="color: var(--cocoa);">
+          Small-batch beans for people who take their mood seriously.
+        </p>
+        <svg class="shrink-0 sticker-float-b" width="32" height="32" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <ellipse cx="18" cy="18" rx="13" ry="9" transform="rotate(-32 18 18)" fill="#fdfdfd" stroke="#463429" stroke-width="2"/>
+          <path d="M9.5 23.5c3.5-4.5 7.5-2.5 10-6.5 2-3.2 4.5-3.8 7-4" stroke="#463429" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 5: PRESS / PROOF STRIP (#53b7b9, 60px tall, horizontal scroll mobile)
+         ====================================================================== -->
+    <section class="color-band" style="background-color: var(--teal); border-bottom: 1px solid var(--cocoa-25);" aria-label="Featured press and retailers">
+      <div class="band-inner py-4">
+        <div class="flex items-center justify-start md:justify-between gap-10 overflow-x-auto no-scrollbar px-1">
+          <span class="font-serif-italic text-[22px] md:text-[24px] shrink-0" style="color: var(--cocoa-80);">Bon Appétit</span>
+          <span class="font-marker text-[15px] md:text-[17px] tracking-widest shrink-0" style="color: var(--cocoa-80);">SPRUDGE</span>
+          <span class="font-sans-body font-bold text-[15px] md:text-[17px] tracking-[0.22em] shrink-0" style="color: var(--cocoa-80);">EREWHON</span>
+          <span class="font-serif-italic text-[21px] md:text-[23px] shrink-0" style="color: var(--cocoa-80);">Whole Foods</span>
+          <span class="font-marker text-[14px] md:text-[16px] tracking-wider shrink-0" style="color: var(--cocoa-80);">COOL HUNTING</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 6: SIGNATURE INTERACTIVE — "MOOD & ROAST DIAL" (#cbecf6)
+         Primary + Secondary + Ambient Motion Layers, Self-Evident UX
+         ====================================================================== -->
+    <section id="mood-blender" class="color-band band-pad" style="background-color: var(--sky); border-bottom: 1px solid var(--cocoa-25);">
+      <div class="band-inner">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+
+          <!-- Left 5 Cols: Header + 4 Mood Switcher Pills -->
+          <div class="lg:col-span-5 reveal-el" style="--stagger: 0ms;">
+            <span class="tag-pill tag-teal mb-4">MOOD BLENDER</span>
+            <h2 class="font-serif-italic text-[38px] md:text-[48px] mb-4" style="color: var(--cocoa);">
+              Good coffee, better mood.
+            </h2>
+            <p class="text-[15.5px] mb-7 max-w-[44ch]" style="color: var(--cocoa-90);">
+              Your 7am brain wants something totally different from your 3pm slump. Pick how your day feels right now and see the roast built for it.
+            </p>
+
+            <!-- Mood Selector Pills (Populated from Sanity-ready data) -->
+            <div id="moodPillsContainer" class="flex flex-wrap gap-3" role="group" aria-label="Mood selector"></div>
+          </div>
+
+          <!-- Right 7 Cols: Live Morphing Bag Stage + Sensory Bars + Instant Add -->
+          <div class="lg:col-span-7">
+            <div class="relative rounded-[20px] p-6 sm:p-8 border-2" style="background-color: var(--rose); border-color: var(--cocoa);">
+              <!-- Ambient Corner Doodle Star -->
+              <svg class="sticker-float-a absolute -top-5 -right-4 pointer-events-none" width="46" height="46" viewBox="0 0 48 48" aria-hidden="true">
+                <polygon points="24,2 29,16 44,14 33,24 41,38 26,32 17,45 16,30 2,26 15,18" fill="#53b7b9" stroke="#463429" stroke-width="2"/>
+              </svg>
+
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+                <!-- Morphing Cutout SVG Coffee Bag -->
+                <div class="sm:col-span-5 flex items-center justify-center">
+                  <div id="moodBagStage" class="w-[185px] sm:w-[210px] bag-stage-anim">
+                    <!-- Dynamic SVG rendered by JS -->
+                  </div>
+                </div>
+
+                <!-- Matched Roast Details & Animated Meters -->
+                <div id="moodDetailsStage" class="sm:col-span-7 follow-through-anim">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span id="moodMatchBadge" class="tag-pill tag-orange">98.4% MATCH</span>
+                    <span id="moodOriginTag" class="tag-pill tag-white">COLOMBIA + ETHIOPIA</span>
+                  </div>
+
+                  <h3 id="moodRoastTitle" class="font-serif-italic text-[32px] md:text-[38px] mb-1" style="color: var(--cocoa);">
+                    Jumpstart Espresso
+                  </h3>
+                  <p id="moodTastingNotes" class="text-[14.5px] font-medium mb-4" style="color: var(--cocoa);">
+                    Dark cacao · Toasted almond · Thick caramel crema
+                  </p>
+
+                  <!-- Sensory Bars -->
+                  <div class="space-y-3 mb-5">
+                    <div>
+                      <div class="flex justify-between text-[11px] font-marker mb-1">
+                        <span>ROAST LEVEL</span>
+                        <span id="meterRoastLabel">4.5 / 5</span>
+                      </div>
+                      <div class="meter-track"><div id="meterRoastFill" class="meter-fill" style="transform: scaleX(0.9);"></div></div>
+                    </div>
+                    <div>
+                      <div class="flex justify-between text-[11px] font-marker mb-1">
+                        <span>BRIGHT ACIDITY</span>
+                        <span id="meterAcidityLabel">2.0 / 5</span>
+                      </div>
+                      <div class="meter-track"><div id="meterAcidityFill" class="meter-fill" style="transform: scaleX(0.4); background-color: var(--teal);"></div></div>
+                    </div>
+                    <div>
+                      <div class="flex justify-between text-[11px] font-marker mb-1">
+                        <span>VELVET BODY</span>
+                        <span id="meterBodyLabel">4.8 / 5</span>
+                      </div>
+                      <div class="meter-track"><div id="meterBodyFill" class="meter-fill" style="transform: scaleX(0.96); background-color: var(--orange);"></div></div>
+                    </div>
+                  </div>
+
+                  <!-- Grind Picker + Price + Direct Add CTA -->
+                  <div class="flex flex-wrap items-center gap-2 mb-4" id="moodGrindGroup" role="group" aria-label="Grind selection">
+                    <button type="button" class="grind-chip" data-grind="Whole Bean" aria-pressed="true">Whole Bean</button>
+                    <button type="button" class="grind-chip" data-grind="Espresso" aria-pressed="false">Espresso</button>
+                    <button type="button" class="grind-chip" data-grind="Drip" aria-pressed="false">Drip</button>
+                    <button type="button" class="grind-chip" data-grind="French Press" aria-pressed="false">French Press</button>
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-4">
+                    <span id="moodPrice" class="font-serif-italic text-[28px]" style="color: var(--cocoa);">$19.50</span>
+                    <button type="button" id="moodAddBtn" class="btn-pill btn-primary">
+                      ADD MATCHED ROAST
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 7: SPLIT FEATURE BLOCK (Asymmetric Overlap, #fdfdfd / #e4a1ae)
+         Deliberate asymmetry: cutout visual overlaps band edge by 32px
+         ====================================================================== -->
+    <section id="our-story" class="color-band" style="background-color: var(--offwhite); border-bottom: 1px solid var(--cocoa-25);">
+      <div class="grid grid-cols-1 md:grid-cols-2 items-stretch">
+        <!-- Image Side (Stacks above text on mobile, rose flat wash, overlapping cutout) -->
+        <div class="order-1 md:order-2 relative flex items-center justify-center py-12 px-6 md:py-16" style="background-color: var(--rose);">
+          <!-- Rotated Sticker Accent -->
+          <div class="sticker-float-b absolute top-6 right-6 z-10 px-3 py-1.5 rounded-full border-2" style="background-color: var(--offwhite); border-color: var(--cocoa);">
+            <span class="font-marker text-[10px]">47.2% FRESHER AROMA</span>
+          </div>
+
+          <!-- Cutout-Style Coffee Visual Overlapping Left Edge on Desktop -->
+          <div class="relative z-10 w-full max-w-[400px] md:-ml-16 reveal-el" style="--stagger: 60ms;">
+            <img
+              src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=900&q=85"
+              onerror="this.onerror=null;this.src='https://placehold.co/800x800/463429/fdfdfd?text=Fresh+Roasted+Beans';"
+              alt="Freshly roasted specialty coffee beans spilling from a craft bag"
+              class="w-full aspect-square object-cover rounded-[20px] border-2"
+              style="border-color: var(--cocoa);"
+            />
+          </div>
+        </div>
+
+        <!-- Text Side (Offset 1 column feel via generous container alignment) -->
+        <div class="order-2 md:order-1 flex items-center justify-center md:justify-end px-6 py-12 md:py-20 md:pr-14 lg:pr-20">
+          <div class="max-w-[460px] reveal-el" style="--stagger: 0ms;">
+            <p class="font-marker text-[11px] tracking-[0.08em] mb-3" style="color: var(--orange);">
+              THE FRESHNESS PROBLEM
+            </p>
+            <h2 class="font-serif-italic text-[34px] md:text-[46px] mb-5" style="color: var(--cocoa);">
+              Why grocery coffee tastes like burnt toast.
+            </h2>
+            <p class="text-[15.5px] mb-4" style="color: var(--cocoa-90);">
+              Supermarket bags sit in fluorescent warehouses for 7 to 11 months before you ever crack the seal. By then, the sweet aromatics have evaporated and all that survives is harsh, sour bitterness.
+            </p>
+            <p class="text-[15.5px] mb-7" style="color: var(--cocoa-90);">
+              We roast Kavera lots every Tuesday and Friday, stamp the exact date on the front, and ship within 24 hours—preserving <strong>47.2%</strong> more volatile flavor oils so you can skip the sugary syrups.
+            </p>
+            <a href="#shop" class="btn-pill btn-primary">CLAIM YOUR BAG</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 8: PRODUCT LISTING (#fdfdfd, hairline divider, 3-up / 2-up / 1-up)
+         Flat #cbecf6 cards, 18px radius, NO shadow, NO card hover animations
+         ====================================================================== -->
+    <section id="shop" class="color-band band-pad" style="background-color: var(--offwhite); border-bottom: 1px solid var(--cocoa-25);">
+      <div id="roasts" class="band-inner">
+        <!-- Heading + Filter Bar -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-5" style="border-bottom: 1px solid var(--cocoa);">
+          <div>
+            <p class="font-marker text-[11px] tracking-[0.08em] mb-2" style="color: var(--teal);">
+              SMALL-BATCH LINEUP
+            </p>
+            <h2 class="font-serif-italic text-[36px] md:text-[46px] m-0" style="color: var(--cocoa);">
+              Fresh off the roaster
+            </h2>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div id="categoryFilters" class="flex flex-wrap gap-2" role="group" aria-label="Filter roasts by category">
+            <button type="button" class="filter-pill" data-category="all" aria-pressed="true">ALL ROASTS</button>
+            <button type="button" class="filter-pill" data-category="espresso" aria-pressed="false">ESPRESSO</button>
+            <button type="button" class="filter-pill" data-category="medium" aria-pressed="false">MEDIUM</button>
+            <button type="button" class="filter-pill" data-category="cold-brew" aria-pressed="false">COLD BREW</button>
+            <button type="button" class="filter-pill" data-category="decaf" aria-pressed="false">DECAF</button>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          <!-- Rendered dynamically from Sanity-ready SANITY_CMS_DATA -->
+        </div>
+
+        <!-- Empty Search/Filter State -->
+        <div id="emptyProductState" class="hidden text-center py-14">
+          <p class="font-serif-italic text-[28px] mb-3" style="color: var(--cocoa);">No roasts match that search.</p>
+          <button type="button" id="resetFilterBtn" class="btn-pill btn-secondary">SHOW ALL ROASTS</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 9: ASYMMETRIC VALUE-PROP BENTO (#e4a1ae)
+         Anti-slop: 7+5 top row, 5+7 bottom row (NO 3 equal horizontal cards)
+         ====================================================================== -->
+    <section class="color-band band-pad" style="background-color: var(--rose); border-bottom: 1px solid var(--cocoa-25);">
+      <div class="band-inner">
+        <div class="mb-10 md:pl-12 reveal-el" style="--stagger: 0ms;">
+          <p class="font-marker text-[11px] tracking-[0.08em] mb-2" style="color: var(--cocoa);">
+            WHY DRINKERS SWITCH
+          </p>
+          <h2 class="font-serif-italic text-[36px] md:text-[48px] m-0 max-w-[560px]" style="color: var(--cocoa);">
+            Built for better mornings, not warehouse shelves.
+          </h2>
+        </div>
+
+        <!-- Asymmetric 12-Column Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <!-- Row 1 Left (7 cols) -->
+          <div class="md:col-span-7 rounded-[20px] p-7 border-2 reveal-el" style="background-color: var(--offwhite); border-color: var(--cocoa); --stagger: 40ms;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#463429" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
+              <rect x="4" y="6" width="24" height="21" rx="3"/>
+              <path d="M4 12h24M10 3v5M22 3v5M11 19l3 3 7-7"/>
+            </svg>
+            <h3 class="font-marker text-[14px] tracking-[0.06em] mb-2" style="color: var(--cocoa);">ROAST DATE STAMPED ON EVERY BAG</h3>
+            <p class="text-[15.5px] m-0 max-w-[52ch]" style="color: var(--cocoa-90);">
+              No vague "best by" guesses two years from now. You see the exact morning your beans dropped out of the drum so you brew them right at peak bloom.
+            </p>
+          </div>
+
+          <!-- Row 1 Right (5 cols) -->
+          <div class="md:col-span-5 rounded-[20px] p-7 border-2 reveal-el" style="background-color: var(--sky); border-color: var(--cocoa); --stagger: 110ms;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#463429" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
+              <path d="M16 4c6 5 10 10 10 15a10 10 0 0 1-20 0c0-5 4-10 10-15z"/>
+              <path d="M12 20c1.2 1.8 3.2 2.5 5.5 2"/>
+            </svg>
+            <h3 class="font-marker text-[14px] tracking-[0.06em] mb-2" style="color: var(--cocoa);">ZERO-ACID STOMACH FRIENDLY</h3>
+            <p class="text-[15.5px] m-0" style="color: var(--cocoa-90);">
+              Slow drum curves caramelize natural sugars without scorching the bean, cutting bitter chlorogenic bite by 38.6%.
+            </p>
+          </div>
+
+          <!-- Row 2 Left (5 cols) -->
+          <div class="md:col-span-5 rounded-[20px] p-7 border-2 reveal-el" style="background-color: var(--teal); border-color: var(--cocoa); --stagger: 170ms;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#463429" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
+              <circle cx="16" cy="16" r="12"/>
+              <path d="M4.5 16h23M16 4c3.5 3.5 5 7.5 5 12s-1.5 8.5-5 12c-3.5-3.5-5-7.5-5-12s1.5-8.5 5-12z"/>
+            </svg>
+            <h3 class="font-marker text-[14px] tracking-[0.06em] mb-2" style="color: var(--cocoa);">FARM-DIRECT LOTS</h3>
+            <p class="text-[15.5px] m-0" style="color: var(--cocoa-90);">
+              We pay 2.4x Fair Trade minimums directly to family growers in Huila, Yirgacheffe, and Huehuetenango.
+            </p>
+          </div>
+
+          <!-- Row 2 Right (7 cols) -->
+          <div class="md:col-span-7 rounded-[20px] p-7 border-2 reveal-el" style="background-color: var(--offwhite); border-color: var(--cocoa); --stagger: 230ms;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#463429" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
+              <path d="M16 3l11 4.5v8.2c0 6.8-4.6 11.4-11 13.3C9.6 27.1 5 22.5 5 15.7V7.5L16 3z"/>
+              <path d="M11.5 16.2l3 3 6.5-6.5"/>
+            </svg>
+            <h3 class="font-marker text-[14px] tracking-[0.06em] mb-2" style="color: var(--cocoa);">30-DAY EMPTY-BAG GUARANTEE</h3>
+            <p class="text-[15.5px] m-0 max-w-[52ch]" style="color: var(--cocoa-90);">
+              Brew the whole bag. If it does not beat your current morning cup, email us your order number and we refund every cent or ship a different roast free.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 10: ASYMMETRIC TESTIMONIAL BAND (#cbecf6)
+         Editorial 7-col lead quote + 5-col stacked quotes
+         ====================================================================== -->
+    <section id="reviews" class="color-band band-pad" style="background-color: var(--sky); border-bottom: 1px solid var(--cocoa-25);">
+      <div class="band-inner">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div>
+            <span class="tag-pill tag-white mb-3">4.92 / 5 FROM 706 DRINKERS</span>
+            <h2 class="font-serif-italic text-[36px] md:text-[48px] m-0" style="color: var(--cocoa);">
+              What morning people are saying.
+            </h2>
+          </div>
+          <p class="text-[15px] max-w-[38ch] m-0" style="color: var(--cocoa-90);">
+            Unfiltered notes from folks who traded $7 cafe lines for freshly roasted Kavera at home.
+          </p>
+        </div>
+
+        <!-- Asymmetric Editorial Layout -->
+        <div id="testimonialGrid" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <!-- Rendered from Sanity-ready SANITY_CMS_DATA -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 11: NEWSLETTER BAND (#ff4500)
+         Inline validation with 350ms shake on error & ease-out-back checkmark pop
+         ====================================================================== -->
+    <section class="color-band band-pad" style="background-color: var(--orange); border-bottom: 1px solid var(--cocoa-25);">
+      <div class="band-inner text-center">
+        <div class="max-w-[560px] mx-auto reveal-el" style="--stagger: 0ms;">
+          <p class="font-marker text-[11px] tracking-[0.1em] mb-3" style="color: var(--cocoa);">
+            TUESDAY &amp; FRIDAY ROAST DROPS
+          </p>
+          <h2 class="font-serif-italic text-[40px] md:text-[54px] mb-3" style="color: var(--offwhite);">
+            Drop day alerts, zero spam.
+          </h2>
+          <p class="text-[15.5px] mb-7" style="color: var(--offwhite); opacity: 0.94;">
+            Get first dibs on micro-lots and 15% off your first bag. One short email when fresh beans come out of the roaster.
+          </p>
+
+          <form id="newsletterForm" novalidate class="w-full">
+            <label for="newsletterEmail" class="sr-only">Email address</label>
+            <div id="newsletterFieldWrap" class="flex flex-col sm:flex-row items-stretch gap-3">
+              <input
+                id="newsletterEmail"
+                type="email"
+                placeholder="you@domain.com"
+                autocomplete="email"
+                class="flex-1 rounded-full px-5 py-3.5 text-[15px]"
+                style="background-color: var(--offwhite); color: var(--cocoa); border: 1.5px solid var(--cocoa);"
+              />
+              <button type="submit" class="btn-pill btn-cocoa !py-3.5 !px-7 shrink-0">
+                JOIN THE LIST
+              </button>
+            </div>
+
+            <!-- Inline Error / Success Feedback -->
+            <div id="newsletterFeedback" class="mt-3 min-h-[26px] flex items-center justify-center gap-2 text-[14px] font-medium" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       BAND 12: FOOTER (#463429, off-white text, 4-col desktop / accordions mobile)
+       ======================================================================== -->
+  <footer class="color-band" style="background-color: var(--cocoa); color: var(--offwhite);">
+    <div class="band-inner pt-14 pb-10 md:pt-20 md:pb-12">
+      <!-- Top Row: Badge + Tagline -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10" style="border-bottom: 1px solid rgba(253, 253, 253, 0.2);">
+        <div>
+          <a href="#top" class="logo-badge mb-3">KAVERA COFFEE</a>
+          <p class="text-[14.5px] m-0 max-w-[44ch]" style="color: rgba(253, 253, 253, 0.82);">
+            Small-batch specialty coffee roasted to order in the US. Good coffee, better mood — since 2026.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="tag-pill tag-orange">ROASTED WEEKLY</span>
+          <span class="tag-pill tag-teal">100% ARABICA</span>
+        </div>
+      </div>
+
+      <!-- 4-Column Link Grid (Desktop) / Accessible Accordions (Mobile) -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-0 md:gap-8 py-6 md:py-12">
+        <!-- Col 1 -->
+        <div class="footer-col py-3 md:py-0" style="border-bottom: 1px solid rgba(253, 253, 253, 0.2);" data-acc>
+          <button type="button" class="footer-acc-trigger w-full flex items-center justify-between md:pointer-events-none text-left" aria-expanded="false">
+            <span class="font-marker text-[12px] tracking-[0.08em]" style="color: var(--sky);">SHOP COFFEE</span>
+            <svg class="md:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <ul class="footer-acc-panel hidden md:flex flex-col gap-2.5 mt-4 list-none p-0 text-[14.5px]">
+            <li><a href="#shop" class="hover:text-[#e4a1ae] transition-colors">All Roasts</a></li>
+            <li><a href="#mood-blender" class="hover:text-[#e4a1ae] transition-colors">Mood Blender</a></li>
+            <li><a href="#shop" class="hover:text-[#e4a1ae] transition-colors">Espresso Blends</a></li>
+            <li><a href="#shop" class="hover:text-[#e4a1ae] transition-colors">Cold Brew Reserve</a></li>
+            <li><a href="#shop" class="hover:text-[#e4a1ae] transition-colors">Swiss Water Decaf</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="footer-col py-3 md:py-0" style="border-bottom: 1px solid rgba(253, 253, 253, 0.2);" data-acc>
+          <button type="button" class="footer-acc-trigger w-full flex items-center justify-between md:pointer-events-none text-left" aria-expanded="false">
+            <span class="font-marker text-[12px] tracking-[0.08em]" style="color: var(--sky);">ROASTERY</span>
+            <svg class="md:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <ul class="footer-acc-panel hidden md:flex flex-col gap-2.5 mt-4 list-none p-0 text-[14.5px]">
+            <li><a href="#our-story" class="hover:text-[#e4a1ae] transition-colors">Our Story</a></li>
+            <li><a href="#our-story" class="hover:text-[#e4a1ae] transition-colors">Farm-Direct Sourcing</a></li>
+            <li><a href="#reviews" class="hover:text-[#e4a1ae] transition-colors">Customer Reviews</a></li>
+            <li><a href="#mood-blender" class="hover:text-[#e4a1ae] transition-colors">Brewing Ratios</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="footer-col py-3 md:py-0" style="border-bottom: 1px solid rgba(253, 253, 253, 0.2);" data-acc>
+          <button type="button" class="footer-acc-trigger w-full flex items-center justify-between md:pointer-events-none text-left" aria-expanded="false">
+            <span class="font-marker text-[12px] tracking-[0.08em]" style="color: var(--sky);">SUPPORT</span>
+            <svg class="md:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <ul class="footer-acc-panel hidden md:flex flex-col gap-2.5 mt-4 list-none p-0 text-[14.5px]">
+            <li><a href="#shop" class="hover:text-[#e4a1ae] transition-colors">Shipping &amp; Freshness</a></li>
+            <li><a href="#our-story" class="hover:text-[#e4a1ae] transition-colors">30-Day Guarantee</a></li>
+            <li><a href="#newsletterForm" class="hover:text-[#e4a1ae] transition-colors">Wholesale Inquiries</a></li>
+            <li><a href="mailto:hello@kaveracoffee.com" class="hover:text-[#e4a1ae] transition-colors">hello@kaveracoffee.com</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4 -->
+        <div class="footer-col py-3 md:py-0" style="border-bottom: 1px solid rgba(253, 253, 253, 0.2);" data-acc>
+          <button type="button" class="footer-acc-trigger w-full flex items-center justify-between md:pointer-events-none text-left" aria-expanded="false">
+            <span class="font-marker text-[12px] tracking-[0.08em]" style="color: var(--sky);">SOCIAL</span>
+            <svg class="md:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <ul class="footer-acc-panel hidden md:flex flex-col gap-2.5 mt-4 list-none p-0 text-[14.5px]">
+            <li><a href="#top" class="hover:text-[#e4a1ae] transition-colors">Instagram</a></li>
+            <li><a href="#top" class="hover:text-[#e4a1ae] transition-colors">TikTok</a></li>
+            <li><a href="#top" class="hover:text-[#e4a1ae] transition-colors">YouTube</a></li>
+            <li><a href="#top" class="hover:text-[#e4a1ae] transition-colors">Spotify Roast Radio</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Remove mobile bottom border on desktop cols via inline style override -->
+      <style>
+        @media (min-width: 768px) {
+          .footer-col { border-bottom: 0 !important; }
+        }
+      </style>
+
+      <!-- Bottom Legal Bar -->
+      <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[13px]" style="border-top: 1px solid rgba(253, 253, 253, 0.2); color: rgba(253, 253, 253, 0.72);">
+        <p class="m-0">&copy; 2026 Kavera Coffee Roasters. All rights reserved.</p>
+        <div class="flex flex-wrap gap-5">
+          <a href="#top" class="hover:text-[#fdfdfd]">Privacy Policy</a>
+          <a href="#top" class="hover:text-[#fdfdfd]">Terms of Service</a>
+          <a href="#top" class="hover:text-[#fdfdfd]">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       SLIDE-OVER CART DRAWER ($45 Free Shipping Bar, Qty +/-, Inline Checkout)
+       ======================================================================== -->
+  <div id="cartBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
+    <!-- Drawer Header -->
+    <div class="px-5 py-4 flex items-center justify-between" style="background-color: var(--sky); border-bottom: 1.5px solid var(--cocoa);">
+      <div class="flex items-center gap-2">
+        <h2 id="cartDrawerTitle" class="font-serif-italic text-[28px] m-0" style="color: var(--cocoa);">Your bag</h2>
+        <span id="drawerItemCount" class="tag-pill tag-orange">0</span>
+      </div>
+      <button type="button" id="cartCloseBtn" class="icon-btn" aria-label="Close shopping bag">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <!-- Free Shipping Progress Bar ($45 Threshold) -->
+    <div class="px-5 py-3" style="background-color: var(--rose); border-bottom: 1.5px solid var(--cocoa);">
+      <p id="shippingText" class="font-marker text-[11px] tracking-[0.04em] m-0 mb-2" style="color: var(--cocoa);">
+        ADD $45.00 MORE FOR FREE US SHIPPING
+      </p>
+      <div class="meter-track" style="height: 8px;">
+        <div id="shippingBarFill" class="meter-fill" style="transform: scaleX(0); background-color: var(--orange);"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items List -->
+    <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4">
+      <!-- Populated dynamically -->
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-5" style="background-color: var(--offwhite); border-top: 1.5px solid var(--cocoa);">
+      <div class="flex items-baseline justify-between mb-4">
+        <span class="font-marker text-[12px] tracking-[0.06em]">SUBTOTAL</span>
+        <span id="cartSubtotal" class="font-serif-italic text-[28px]">$0.00</span>
+      </div>
+      <button type="button" id="checkoutBtn" class="btn-pill btn-primary w-full !py-3.5">
+        CHECKOUT NOW
+      </button>
+      <p id="checkoutStatus" class="hidden mt-3 text-center text-[13.5px] font-medium p-2.5 rounded-xl" style="background-color: var(--teal); color: var(--cocoa); border: 1.5px solid var(--cocoa);"></p>
+    </div>
+  </aside>
+
+  <!-- Inline Toast Notification (Non-blocking, replaces any alert) -->
+  <div
+    id="toastBox"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-full border-2 font-marker text-[11.5px] tracking-wider pointer-events-none opacity-0 transition-all duration-200"
+    style="background-color: var(--cocoa); color: var(--offwhite); border-color: var(--offwhite);"
+  ></div>
+
+  <!-- ========================================================================
+       APPLICATION SCRIPT — SANITY-READY DATA, INTERACTIONS, CART & ANIMATIONS
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------------------------------------
+         1. SANITY CMS-READY STRUCTURED DATA
+         Modeled after Sanity GROQ documents (_type, _id, slug) for drop-in wiring
+         ---------------------------------------------------------------------- */
+      const SANITY_CMS_DATA = {
+        products: [
+          {
+            _type: 'coffeeProduct',
+            _id: 'prod-jumpstart-espresso',
+            slug: { current: 'jumpstart-espresso' },
+            title: 'Jumpstart Espresso',
+            category: 'espresso',
+            price: 19.50,
+            tag: { label: 'BEST SELLER', tone: 'orange' },
+            notes: 'Dark cacao · Toasted almond · Thick caramel crema',
+            origin: 'Colombia + Ethiopia',
+            image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=85',
+            fallback: 'https://placehold.co/640x800/463429/fdfdfd?text=Jumpstart+Espresso'
+          },
+          {
+            _type: 'coffeeProduct',
+            _id: 'prod-velvet-daily',
+            slug: { current: 'velvet-daily-medium' },
+            title: 'Velvet Daily Medium',
+            category: 'medium',
+            price: 18.00,
+            tag: { label: 'LOW ACID', tone: 'teal' },
+            notes: 'Roasted hazelnut · Milk chocolate · Brown sugar',
+            origin: 'Huila, Colombia',
+            image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=85',
+            fallback: 'https://placehold.co/640x800/e4a1ae/463429?text=Velvet+Daily'
+          },
+          {
+            _type: 'coffeeProduct',
+            _id: 'prod-sunrise-single',
+            slug: { current: 'sunrise-yirgacheffe' },
+            title: 'Sunrise Yirgacheffe',
+            category: 'medium',
+            price: 21.00,
+            tag: { label: 'MICRO-LOT', tone: 'white' },
+            notes: 'Candied peach · Jasmine blossom · Honey',
+            origin: 'Yirgacheffe, Ethiopia',
+            image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=85',
+            fallback: 'https://placehold.co/640x800/53b7b9/463429?text=Sunrise+Yirgacheffe'
+          },
+          {
+            _type: 'coffeeProduct',
+            _id: 'prod-chill-cold-brew',
+            slug: { current: 'chill-pill-cold-brew' },
+            title: 'Chill Pill Cold Brew',
+            category: 'cold-brew',
+            price: 19.00,
+            tag: { label: 'ICED FAVORITE', tone: 'teal' },
+            notes: 'Molasses · Sweet pecan · Smooth dark fudge',
+            origin: 'Huehuetenango, Guatemala',
+            image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=800&q=85',
+            fallback: 'https://placehold.co/640x800/cbecf6/463429?text=Chill+Pill+Cold+Brew'
+          },
+          {
+            _type: 'coffeeProduct',
+            _id: 'prod-double-shot-dark',
+            slug: { current: 'night-shift-espresso' },
+            title: 'Night Shift Espresso',
+            category: 'espresso',
+            price: 20.00,
+            tag: { label: 'BOLDEST', tone: 'orange' },
+            notes: 'Bittersweet cocoa · Smoked maple · Crisp finish',
+            origin: 'Sul de Minas, Brazil',
+            image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=85',
+            fallback: 'https://placehold.co/640x800/463429/fdfdfd?text=Night+Shift+Espresso'
+          },
+          {
+            _type: 'coffeeProduct',
+            _id: 'prod-cloud-nine-decaf',
+            slug: { current: 'cloud-nine-decaf' },
+            title: 'Cloud Nine Decaf',
+            category: 'decaf',
+            price: 18.50,
+            tag: { label: 'SWISS WATER', tone: 'white' },
+            notes: 'Toasted marshmallow · Vanilla bean · Sweet cocoa',
+            origin: 'Cauca, Colombia',
+            image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=85',
+            fallback: 'https://placehold.co/640x800/e4a1ae/463429?text=Cloud+Nine+Decaf'
+          }
+        ],
+        moods: [
+          {
+            _type: 'moodProfile',
+            _id: 'mood-dead-tired',
+            label: 'DEAD TIRED',
+            productId: 'prod-jumpstart-espresso',
+            matchPercent: '98.4% MATCH',
+            roast: 4.5,
+            acidity: 2.0,
+            body: 4.8,
+            bagColor: '#ff4500',
+            bagAccent: '#cbecf6',
+            bagSticker: 'WAKE UP'
+          },
+          {
+            _type: 'moodProfile',
+            _id: 'mood-deep-focus',
+            label: 'DEEP FOCUS',
+            productId: 'prod-sunrise-single',
+            matchPercent: '96.8% MATCH',
+            roast: 2.6,
+            acidity: 4.2,
+            body: 3.1,
+            bagColor: '#53b7b9',
+            bagAccent: '#fdfdfd',
+            bagSticker: 'LOCK IN'
+          },
+          {
+            _type: 'moodProfile',
+            _id: 'mood-cozy-slow',
+            label: 'COZY SLOW',
+            productId: 'prod-velvet-daily',
+            matchPercent: '97.5% MATCH',
+            roast: 3.4,
+            acidity: 2.4,
+            body: 4.2,
+            bagColor: '#cbecf6',
+            bagAccent: '#e4a1ae',
+            bagSticker: 'SLOW SIP'
+          },
+          {
+            _type: 'moodProfile',
+            _id: 'mood-late-night',
+            label: 'LATE NIGHT',
+            productId: 'prod-cloud-nine-decaf',
+            matchPercent: '99.1% MATCH',
+            roast: 3.2,
+            acidity: 1.8,
+            body: 3.9,
+            bagColor: '#463429',
+            bagAccent: '#e4a1ae',
+            bagSticker: 'ZERO BUZZ'
+          }
+        ],
+        testimonials: [
+          {
+            _type: 'testimonial',
+            _id: 'rev-1',
+            featured: true,
+            quote: 'I used to drown my morning coffee in oat milk just to hide the burnt taste. Jumpstart Espresso actually tastes like dark chocolate straight out of my Moka pot—my $6.50 cafe habit died in week one.',
+            author: 'MARA T. — BROOKLYN',
+            roast: 'JUMPSTART ESPRESSO'
+          },
+          {
+            _type: 'testimonial',
+            _id: 'rev-2',
+            featured: false,
+            quote: 'The roast date on my bag was literally 48 hours before it hit my porch. Zero stomach acid, ridiculous crema.',
+            author: 'DEVON K. — AUSTIN',
+            roast: 'VELVET DAILY MEDIUM'
+          },
+          {
+            _type: 'testimonial',
+            _id: 'rev-3',
+            featured: false,
+            quote: 'Cloud Nine is the first decaf that does not taste like cardboard. It is my 9pm dessert ritual now.',
+            author: 'PRIYA S. — SEATTLE',
+            roast: 'CLOUD NINE DECAF'
+          }
+        ]
+      };
+
+      /* ----------------------------------------------------------------------
+         2. STATE
+         ---------------------------------------------------------------------- */
+      const FREE_SHIPPING_THRESHOLD = 45;
+      let cart = [];
+      let activeMoodId = SANITY_CMS_DATA.moods[0]._id;
+      let activeMoodGrind = 'Whole Bean';
+      let activeCategory = 'all';
+      let searchQuery = '';
+      const productGrindSelection = {};
+
+      SANITY_CMS_DATA.products.forEach((p) => {
+        productGrindSelection[p._id] = 'Whole Bean';
+      });
+
+      /* ----------------------------------------------------------------------
+         3. HELPERS
+         ---------------------------------------------------------------------- */
+      const $ = (sel, ctx = document) => ctx.querySelector(sel);
+      const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+      const formatMoney = (num) => '$' + Number(num).toFixed(2);
+
+      function triggerPop(el) {
+        if (!el) return;
+        el.classList.remove('is-popping');
+        void el.offsetWidth;
+        el.classList.add('is-popping');
+      }
+
+      let toastTimer = null;
+      function showToast(msg) {
+        const box = $('#toastBox');
+        if (!box) return;
+        box.textContent = msg;
+        box.style.opacity = '1';
+        box.style.transform = 'translate(-50%, -6px)';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          box.style.opacity = '0';
+          box.style.transform = 'translate(-50%, 4px)';
+        }, 2400);
+      }
+
+      /* ----------------------------------------------------------------------
+         4. SIGNATURE INTERACTIVE: MOOD & ROAST DIAL
+         ---------------------------------------------------------------------- */
+      function buildCoffeeBagSVG(mood, product) {
+        const isDark = mood.bagColor === '#463429';
+        const labelTextColor = isDark ? '#fdfdfd' : '#463429';
+        return `
+          <svg viewBox="0 0 220 280" width="100%" height="auto" role="img" aria-label="${product.title} bag">
+            <!-- Bag Body -->
+            <path d="M36 22 L184 22 L198 62 L192 258 C192 266 185 272 177 272 L43 272 C35 272 28 266 28 258 L22 62 Z" fill="${mood.bagColor}" stroke="#463429" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- Top Crimp Fold -->
+            <path d="M36 22 L184 22 L190 48 L30 48 Z" fill="${mood.bagAccent}" stroke="#463429" stroke-width="3" stroke-linejoin="round"/>
+            <line x1="30" y1="48" x2="190" y2="48" stroke="#463429" stroke-width="3"/>
+            <!-- Front Label Sticker -->
+            <rect x="44" y="76" width="132" height="148" rx="14" fill="#fdfdfd" stroke="#463429" stroke-width="3"/>
+            <!-- Brand Micro Header -->
+            <text x="110" y="102" text-anchor="middle" fill="#463429" font-family="Permanent Marker, cursive" font-size="11" letter-spacing="1">KAVERA COFFEE</text>
+            <line x1="62" y1="112" x2="158" y2="112" stroke="#463429" stroke-width="1.5"/>
+            <!-- Roast Title -->
+            <text x="110" y="142" text-anchor="middle" fill="#463429" font-family="Instrument Serif, serif" font-style="italic" font-size="22">${product.title.split(' ')[0]}</text>
+            <text x="110" y="165" text-anchor="middle" fill="#463429" font-family="Instrument Serif, serif" font-style="italic" font-size="20">${product.title.split(' ').slice(1).join(' ')}</text>
+            <!-- Hand-drawn Bean -->
+            <ellipse cx="110" cy="192" rx="15" ry="10" transform="rotate(-24 110 192)" fill="${mood.bagAccent}" stroke="#463429" stroke-width="2.2"/>
+            <path d="M99 197 C105 191 112 194 121 187" stroke="#463429" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Bottom Weight -->
+            <text x="110" y="250" text-anchor="middle" fill="${labelTextColor}" font-family="Permanent Marker, cursive" font-size="10.5">NET WT 12 OZ · WHOLE BEAN</text>
+            <!-- Tilted Corner Mood Sticker -->
+            <g transform="translate(152 62) rotate(10)">
+              <rect x="-32" y="-13" width="64" height="26" rx="13" fill="#ff4500" stroke="#463429" stroke-width="2.2"/>
+              <text x="0" y="4" text-anchor="middle" fill="#fdfdfd" font-family="Permanent Marker, cursive" font-size="9">${mood.bagSticker}</text>
+            </g>
+          </svg>
+        `;
+      }
+
+      function renderMoodPills() {
+        const container = $('#moodPillsContainer');
+        if (!container) return;
+        container.innerHTML = SANITY_CMS_DATA.moods
+          .map(
+            (m) => `
+              <button
+                type="button"
+                class="mood-pill"
+                data-mood-id="${m._id}"
+                aria-pressed="${m._id === activeMoodId}"
+              >
+                ${m.label}
+              </button>
+            `
+          )
+          .join('');
+      }
+
+      function updateMoodStage(animate = true) {
+        const mood = SANITY_CMS_DATA.moods.find((m) => m._id === activeMoodId) || SANITY_CMS_DATA.moods[0];
+        const product = SANITY_CMS_DATA.products.find((p) => p._id === mood.productId) || SANITY_CMS_DATA.products[0];
+
+        const bagStage = $('#moodBagStage');
+        const detailsStage = $('#moodDetailsStage');
+
+        if (bagStage) {
+          bagStage.innerHTML = buildCoffeeBagSVG(mood, product);
+          if (animate) {
+            bagStage.classList.remove('bag-stage-anim');
+            void bagStage.offsetWidth;
+            bagStage.classList.add('bag-stage-anim');
+          }
+        }
+
+        if (detailsStage && animate) {
+          detailsStage.classList.remove('follow-through-anim');
+          void detailsStage.offsetWidth;
+          detailsStage.classList.add('follow-through-anim');
+        }
+
+        $('#moodMatchBadge').textContent = mood.matchPercent;
+        $('#moodOriginTag').textContent = product.origin.toUpperCase();
+        $('#moodRoastTitle').textContent = product.title;
+        $('#moodTastingNotes').textContent = product.notes;
+        $('#moodPrice').textContent = formatMoney(product.price);
+
+        $('#meterRoastLabel').textContent = `${mood.roast.toFixed(1)} / 5`;
+        $('#meterAcidityLabel').textContent = `${mood.acidity.toFixed(1)} / 5`;
+        $('#meterBodyLabel').textContent = `${mood.body.toFixed(1)} / 5`;
+
+        $('#meterRoastFill').style.transform = `scaleX(${mood.roast / 5})`;
+        $('#meterAcidityFill').style.transform = `scaleX(${mood.acidity / 5})`;
+        $('#meterBodyFill').style.transform = `scaleX(${mood.body / 5})`;
+
+        $('#moodAddBtn').dataset.productId = product._id;
+      }
+
+      $('#moodPillsContainer').addEventListener('click', (e) => {
+        const btn = e.target.closest('.mood-pill');
+        if (!btn) return;
+        activeMoodId = btn.dataset.moodId;
+        renderMoodPills();
+        updateMoodStage(true);
+      });
+
+      $('#moodGrindGroup').addEventListener('click', (e) => {
+        const chip = e.target.closest('.grind-chip');
+        if (!chip) return;
+        activeMoodGrind = chip.dataset.grind;
+        $$('#moodGrindGroup .grind-chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      });
+
+      $('#moodAddBtn').addEventListener('click', (e) => {
+        const btn = e.currentTarget;
+        triggerPop(btn);
+        addToCart(btn.dataset.productId, activeMoodGrind);
+      });
+
+      /* ----------------------------------------------------------------------
+         5. PRODUCT LISTING RENDER & FILTERING
+         ---------------------------------------------------------------------- */
+      function renderProducts() {
+        const grid = $('#productGrid');
+        const emptyState = $('#emptyProductState');
+        if (!grid) return;
+
+        const q = searchQuery.trim().toLowerCase();
+        const filtered = SANITY_CMS_DATA.products.filter((p) => {
+          const catMatch = activeCategory === 'all' || p.category === activeCategory;
+          const qMatch =
+            !q ||
+            p.title.toLowerCase().includes(q) ||
+            p.notes.toLowerCase().includes(q) ||
+            p.origin.toLowerCase().includes(q) ||
+            p.category.toLowerCase().includes(q);
+          return catMatch && qMatch;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = '';
+          emptyState.classList.remove('hidden');
+          return;
+        }
+
+        emptyState.classList.add('hidden');
+        const grinds = ['Whole Bean', 'Espresso', 'Drip'];
+
+        grid.innerHTML = filtered
+          .map((p, idx) => {
+            const tagClass =
+              p.tag.tone === 'orange' ? 'tag-orange' : p.tag.tone === 'teal' ? 'tag-teal' : 'tag-white';
+            const selectedGrind = productGrindSelection[p._id] || 'Whole Bean';
+            return `
+              <article class="product-card reveal-el is-in" style="--stagger: ${Math.min(idx * 60, 300)}ms;">
+                <div class="product-img-frame">
+                  <img
+                    src="${p.image}"
+                    onerror="this.onerror=null;this.src='${p.fallback}';"
+                    alt="${p.title} specialty coffee"
+                    loading="lazy"
+                  />
+                  <span class="tag-pill ${tagClass} absolute top-3 left-3">${p.tag.label}</span>
+                </div>
+
+                <div class="flex items-baseline justify-between gap-2 mb-1">
+                  <h3 class="font-sans-body font-medium text-[17px] m-0" style="color: var(--cocoa);">${p.title}</h3>
+                  <span class="font-serif-italic text-[24px] shrink-0" style="color: var(--cocoa);">${formatMoney(p.price)}</span>
+                </div>
+
+                <p class="text-[13.5px] m-0 mb-3" style="color: var(--cocoa-80);">${p.notes}</p>
+
+                <!-- Inline Grind Selector -->
+                <div class="flex flex-wrap gap-1.5 mb-4 mt-auto" role="group" aria-label="Grind for ${p.title}">
+                  ${grinds
+                    .map(
+                      (g) => `
+                        <button
+                          type="button"
+                          class="grind-chip js-card-grind"
+                          data-product-id="${p._id}"
+                          data-grind="${g}"
+                          aria-pressed="${g === selectedGrind}"
+                        >${g}</button>
+                      `
+                    )
+                    .join('')}
+                </div>
+
+                <button
+                  type="button"
+                  class="btn-pill btn-primary w-full js-add-product"
+                  data-product-id="${p._id}"
+                >
+                  ADD TO BAG
+                </button>
+              </article>
+            `;
+          })
+          .join('');
+      }
+
+      $('#categoryFilters').addEventListener('click', (e) => {
+        const pill = e.target.closest('.filter-pill');
+        if (!pill) return;
+        activeCategory = pill.dataset.category;
+        $$('#categoryFilters .filter-pill').forEach((p) => p.setAttribute('aria-pressed', String(p === pill)));
+        renderProducts();
+      });
+
+      $('#productGrid').addEventListener('click', (e) => {
+        const grindBtn = e.target.closest('.js-card-grind');
+        if (grindBtn) {
+          const pid = grindBtn.dataset.productId;
+          productGrindSelection[pid] = grindBtn.dataset.grind;
+          const group = grindBtn.parentElement;
+          $$('.js-card-grind', group).forEach((b) => b.setAttribute('aria-pressed', String(b === grindBtn)));
+          return;
+        }
+
+        const addBtn = e.target.closest('.js-add-product');
+        if (addBtn) {
+          triggerPop(addBtn);
+          const pid = addBtn.dataset.productId;
+          addToCart(pid, productGrindSelection[pid] || 'Whole Bean');
+        }
+      });
+
+      $('#resetFilterBtn').addEventListener('click', () => {
+        activeCategory = 'all';
+        searchQuery = '';
+        $('#searchInput').value = '';
+        $$('#categoryFilters .filter-pill').forEach((p) => p.setAttribute('aria-pressed', String(p.dataset.category === 'all')));
+        renderProducts();
+      });
+
+      /* ----------------------------------------------------------------------
+         6. TESTIMONIALS RENDER (Asymmetric 7 + 5 Editorial Layout)
+         ---------------------------------------------------------------------- */
+      function renderTestimonials() {
+        const container = $('#testimonialGrid');
+        if (!container) return;
+        const lead = SANITY_CMS_DATA.testimonials[0];
+        const side = SANITY_CMS_DATA.testimonials.slice(1);
+
+        container.innerHTML = `
+          <div class="lg:col-span-7 rounded-[20px] p-7 md:p-10 border-2 flex flex-col justify-between reveal-el" style="background-color: var(--offwhite); border-color: var(--cocoa); --stagger: 40ms;">
+            <div>
+              <span class="tag-pill tag-teal mb-5">${lead.roast}</span>
+              <blockquote class="font-serif-italic text-[26px] md:text-[34px] m-0 mb-6" style="color: var(--cocoa); line-height: 1.12;">
+                “${lead.quote}”
+              </blockquote>
+            </div>
+            <p class="font-marker text-[12px] tracking-[0.06em] m-0" style="color: var(--cocoa);">
+              ★★★★★ &nbsp; ${lead.author}
+            </p>
+          </div>
+
+          <div class="lg:col-span-5 flex flex-col gap-6">
+            ${side
+              .map(
+                (t, idx) => `
+                  <div class="flex-1 rounded-[20px] p-6 border-2 flex flex-col justify-between reveal-el" style="background-color: ${idx === 0 ? 'var(--rose)' : 'var(--offwhite)'}; border-color: var(--cocoa); --stagger: ${110 + idx * 70}ms;">
+                    <div>
+                      <span class="tag-pill tag-white mb-3">${t.roast}</span>
+                      <blockquote class="font-serif-italic text-[21px] md:text-[23px] m-0 mb-4" style="color: var(--cocoa); line-height: 1.15;">
+                        “${t.quote}”
+                      </blockquote>
+                    </div>
+                    <p class="font-marker text-[11px] tracking-[0.06em] m-0" style="color: var(--cocoa);">
+                      ★★★★★ &nbsp; ${t.author}
+                    </p>
+                  </div>
+                `
+              )
+              .join('')}
+          </div>
+        `;
+      }
+
+      /* ----------------------------------------------------------------------
+         7. WORKING SLIDE-OVER CART DRAWER
+         ---------------------------------------------------------------------- */
+      function openCart() {
+        $('#cartBackdrop').classList.add('is-open');
+        $('#cartDrawer').classList.add('is-open');
+        $('#cartBackdrop').setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeCart() {
+        $('#cartBackdrop').classList.remove('is-open');
+        $('#cartDrawer').classList.remove('is-open');
+        $('#cartBackdrop').setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function addToCart(productId, grind) {
+        const product = SANITY_CMS_DATA.products.find((p) => p._id === productId);
+        if (!product) return;
+
+        const key = `${product._id}::${grind}`;
+        const existing = cart.find((item) => item.key === key);
+        if (existing) {
+          existing.qty += 1;
+        } else {
+          cart.push({
+            key,
+            productId: product._id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            fallback: product.fallback,
+            grind,
+            qty: 1
+          });
+        }
+
+        renderCart();
+        const badge = $('#cartCountBadge');
+        badge.classList.remove('pop');
+        void badge.offsetWidth;
+        badge.classList.add('pop');
+        openCart();
+      }
+
+      function updateQty(key, delta) {
+        const idx = cart.findIndex((i) => i.key === key);
+        if (idx === -1) return;
+        cart[idx].qty += delta;
+        if (cart[idx].qty <= 0) {
+          cart.splice(idx, 1);
+        }
+        renderCart();
+      }
+
+      function renderCart() {
+        const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+        const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+
+        $('#cartCountBadge').textContent = totalQty;
+        $('#drawerItemCount').textContent = totalQty;
+        $('#cartSubtotal').textContent = formatMoney(subtotal);
+
+        // Free shipping progress bar ($45)
+        const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
+        const progress = Math.min(1, subtotal / FREE_SHIPPING_THRESHOLD);
+        $('#shippingBarFill').style.transform = `scaleX(${progress})`;
+        $('#shippingText').textContent =
+          remaining === 0
+            ? 'YOU UNLOCKED FREE US SHIPPING ✦'
+            : `ADD ${formatMoney(remaining)} MORE FOR FREE US SHIPPING`;
+
+        const list = $('#cartItemsList');
+        const checkoutStatus = $('#checkoutStatus');
+        checkoutStatus.classList.add('hidden');
+
+        if (cart.length === 0) {
+          list.innerHTML = `
+            <div class="text-center py-12">
+              <p class="font-serif-italic text-[28px] mb-2" style="color: var(--cocoa);">Your bag is empty.</p>
+              <p class="text-[14.5px] mb-5" style="color: var(--cocoa-80);">Pick a fresh roast to wake up your morning.</p>
+              <button type="button" id="emptyCartShopBtn" class="btn-pill btn-primary">BROWSE ROASTS</button>
+            </div>
+          `;
+          return;
+        }
+
+        list.innerHTML = cart
+          .map(
+            (item) => `
+              <div class="flex gap-3.5 p-3 rounded-[14px] border" style="background-color: var(--sky); border-color: var(--cocoa-25);">
+                <img
+                  src="${item.image}"
+                  onerror="this.onerror=null;this.src='${item.fallback}';"
+                  alt="${item.title}"
+                  class="w-[68px] h-[84px] object-cover rounded-[10px] shrink-0 border"
+                  style="border-color: var(--cocoa-25);"
+                />
+                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-start justify-between gap-2">
+                      <h4 class="font-sans-body font-medium text-[15px] m-0 truncate">${item.title}</h4>
+                      <span class="font-serif-italic text-[20px] leading-none">${formatMoney(item.price * item.qty)}</span>
+                    </div>
+                    <p class="font-marker text-[10px] tracking-wider m-0 mt-1" style="color: var(--cocoa-80);">${item.grind}</p>
+                  </div>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="inline-flex items-center rounded-full border" style="background-color: var(--offwhite); border-color: var(--cocoa);">
+                      <button type="button" class="js-qty-btn px-2.5 py-0.5 font-bold text-sm" data-key="${item.key}" data-delta="-1" aria-label="Decrease quantity">−</button>
+                      <span class="px-2 text-[13px] font-medium">${item.qty}</span>
+                      <button type="button" class="js-qty-btn px-2.5 py-0.5 font-bold text-sm" data-key="${item.key}" data-delta="1" aria-label="Increase quantity">+</button>
+                    </div>
+                    <button type="button" class="js-qty-btn font-marker text-[10px] underline" data-key="${item.key}" data-delta="-${item.qty}">REMOVE</button>
+                  </div>
+                </div>
+              </div>
+            `
+          )
+          .join('');
+      }
+
+      $('#cartOpenBtn').addEventListener('click', openCart);
+      $('#cartCloseBtn').addEventListener('click', closeCart);
+      $('#cartBackdrop').addEventListener('click', closeCart);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeCart();
+      });
+
+      $('#cartItemsList').addEventListener('click', (e) => {
+        const qtyBtn = e.target.closest('.js-qty-btn');
+        if (qtyBtn) {
+          updateQty(qtyBtn.dataset.key, parseInt(qtyBtn.dataset.delta, 10));
+          return;
+        }
+        if (e.target.closest('#emptyCartShopBtn')) {
+          closeCart();
+          $('#shop').scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      $('#checkoutBtn').addEventListener('click', (e) => {
+        triggerPop(e.currentTarget);
+        const status = $('#checkoutStatus');
+        if (cart.length === 0) {
+          status.textContent = 'Add at least one bag before checking out.';
+          status.classList.remove('hidden');
+          return;
+        }
+        status.textContent = 'Order draft ready — roasted fresh on our next batch!';
+        status.classList.remove('hidden');
+      });
+
+      /* ----------------------------------------------------------------------
+         8. HEADER SEARCH, ACCOUNT & MOBILE MENU
+         ---------------------------------------------------------------------- */
+      $('#searchToggleBtn').addEventListener('click', () => {
+        const bar = $('#searchBar');
+        bar.classList.toggle('hidden');
+        if (!bar.classList.contains('hidden')) {
+          $('#searchInput').focus();
+        }
+      });
+
+      $('#searchCloseBtn').addEventListener('click', () => {
+        $('#searchBar').classList.add('hidden');
+      });
+
+      $('#searchInput').addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderProducts();
+        if (searchQuery.trim().length > 0) {
+          $('#shop').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+
+      $('#accountBtn').addEventListener('click', () => {
+        showToast('MEMBER PORTAL OPENS ON ROAST DAY ✦');
+      });
+
+      $('#mobileNavBtn').addEventListener('click', (e) => {
+        const panel = $('#mobileNavPanel');
+        const expanded = !panel.classList.toggle('hidden');
+        e.currentTarget.setAttribute('aria-expanded', String(expanded));
+      });
+
+      $$('.mobile-nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          $('#mobileNavPanel').classList.add('hidden');
+          $('#mobileNavBtn').setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      /* ----------------------------------------------------------------------
+         9. NEWSLETTER VALIDATION (350ms Horizontal Shake / Ease-Out-Back Check)
+         ---------------------------------------------------------------------- */
+      $('#newsletterForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = $('#newsletterEmail');
+        const wrap = $('#newsletterFieldWrap');
+        const feedback = $('#newsletterFeedback');
+        const val = input.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(val)) {
+          wrap.classList.remove('is-shaking');
+          void wrap.offsetWidth;
+          wrap.classList.add('is-shaking');
+          feedback.style.color = '#fdfdfd';
+          feedback.innerHTML = `<span>Enter a valid email like name@domain.com so we know where to send your 15% code.</span>`;
+          input.focus();
+          return;
+        }
+
+        feedback.style.color = '#fdfdfd';
+        feedback.innerHTML = `
+          <svg class="check-pop shrink-0" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#463429"/>
+            <path d="M7.5 12.2l3 3 6-6.2" stroke="#fdfdfd" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>You are on the roast list. Check your inbox for 15% off your first bag.</span>
+        `;
+        input.value = '';
+      });
+
+      /* ----------------------------------------------------------------------
+         10. MOBILE FOOTER ACCORDIONS
+         ---------------------------------------------------------------------- */
+      $$('[data-acc]').forEach((col) => {
+        const trigger = $('.footer-acc-trigger', col);
+        const panel = $('.footer-acc-panel', col);
+        if (!trigger || !panel) return;
+
+        trigger.addEventListener('click', () => {
+          if (window.innerWidth >= 768) return;
+          const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+          trigger.setAttribute('aria-expanded', String(!isOpen));
+          panel.classList.toggle('hidden', isOpen);
+          panel.classList.toggle('flex', !isOpen);
+        });
+      });
+
+      /* ----------------------------------------------------------------------
+         11. INTERSECTION OBSERVER SCROLL REVEAL (Stagger < 500ms)
+         ---------------------------------------------------------------------- */
+      function initScrollReveal() {
+        const els = $$('.reveal-el');
+        if (!('IntersectionObserver' in window)) {
+          els.forEach((el) => el.classList.add('is-in'));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-in');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+
+        els.forEach((el) => observer.observe(el));
+      }
+
+      /* ----------------------------------------------------------------------
+         12. BOOT
+         ---------------------------------------------------------------------- */
+      renderMoodPills();
+      updateMoodStage(false);
+      renderProducts();
+      renderTestimonials();
+      renderCart();
+      initScrollReveal();
+    })();
+  </script>
+</body>
+</html>
